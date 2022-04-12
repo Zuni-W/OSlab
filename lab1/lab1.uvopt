@@ -161,7 +161,7 @@
           <Type>0</Type>
           <LineNumber>133</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218464</Address>
+          <Address>134218468</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -175,23 +175,23 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>113</LineNumber>
+          <LineNumber>60</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134218918</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\stm32f10x_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\template\src/stm32f10x_it.c\60</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>1632</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -200,7 +200,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\src\stm32f10x_it.c</Filename>
+          <Filename>.\src\ucos_ii\src\os_core.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -361,7 +361,7 @@
 
   <Group>
     <GroupName>libstm32</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

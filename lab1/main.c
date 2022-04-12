@@ -53,7 +53,7 @@ static void systick_init(void)
     SysTick_Config(rcc_clocks.HCLK_Frequency / OS_TICKS_PER_SEC); 
 } 
 
-
+void SYS_PRINT_STR(char* str);
 static void syscall_systick_init(void) 
 { 
 	RCC_ClocksTypeDef rcc_clocks; 
@@ -63,10 +63,16 @@ static void syscall_systick_init(void)
 	{
 		SWI 0x02
 	}
- //   SysTick_Config(rcc_clocks.HCLK_Frequency / OS_TICKS_PER_SEC); 
+//    SysTick_Config(rcc_clocks.HCLK_Frequency / OS_TICKS_PER_SEC); 
 } 
 
-
+void syscall_print_str(char *str)
+{
+	__ASM{
+		BL SYS_PRINT_STR
+	}
+}
+/*
 void syscall_print_str(char *str)
 {
 	int i=0;
@@ -84,12 +90,12 @@ void syscall_print_str(char *str)
 		SWI 0x01
 	}
 }
-
+*/
 
 void ASM_Switch_To_Unprivileged(void);
 
-#define FIRST_TASK 1
-//#define SECOND_TASK 1
+//#define FIRST_TASK 1
+#define SECOND_TASK 1
 
 #ifdef FIRST_TASK
 int main(void) 
@@ -110,7 +116,7 @@ void task2(void *p_arg);
 int main(void) 
 { 
 	buffer = malloc(BufferLen);
-	//ASM_Switch_To_Unprivileged();
+	ASM_Switch_To_Unprivileged();
 	syscall_print_str("Hello world!\n");
 	OSInit(); 
 	syscall_systick_init(); 
@@ -126,7 +132,7 @@ static void task1(void *p_arg)
         for (;;) 
         { 
                 OSTimeDly(100); 
-                print_str("Hello from Task 1!\n");
+                syscall_print_str("Hello from Task 1!\n");
                 OSTimeDly(100);   
         } 
 } 
@@ -136,7 +142,7 @@ static void task2(void *p_arg)
         for (;;) 
         { 
                 OSTimeDly(100); 
-                print_str("Hello from Task 2!\n");
+                syscall_print_str("Hello from Task 2!\n");
                 OSTimeDly(100); 
         } 
 } 

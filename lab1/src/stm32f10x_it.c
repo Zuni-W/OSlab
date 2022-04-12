@@ -108,19 +108,32 @@ void UsageFault_Handler(void)
 	}
 }
 
-extern void * buffer;
-void SVC_Handler_Main(int flag)
+//extern void * buffer;
+void SVC_Handler_Main(int flag,void* buffer)
 {
 	switch (flag)
 	{
 		case 0x01: 
 		{
 			// Your code here
+			print_str(buffer);
 			break;
 		}
 		case 0x02: 
 		{
-			// Your code here
+			SysTick_Config(*((uint32_t *)buffer)); 
+//			SysTick_Handler();
+			break;
+		}
+		case 0x03:
+		{
+			OSStartHighRdy();
+			break;
+		}
+		case 0x04:
+		{ 
+			OS_TASK_SW(); 
+
 			break;
 		}
 	}
@@ -152,8 +165,8 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-	print_str("hello from sysTick!\n");
 	OSIntEnter(); 
+//	print_str("hello from sysTick!\n");
 	OSTimeTick(); 
 	OSIntExit(); 
 }

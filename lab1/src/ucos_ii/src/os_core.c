@@ -785,7 +785,15 @@ void  OSStart (void)
         OSPrioCur     = OSPrioHighRdy;
         OSTCBHighRdy  = OSTCBPrioTbl[OSPrioHighRdy]; /* Point to highest priority task ready to run    */
         OSTCBCur      = OSTCBHighRdy;
-        OSStartHighRdy();                            /* Execute target specific code to start task     */
+
+
+
+			__asm
+		{
+			SWI 0x03
+		}
+
+//        OSStartHighRdy();                            /* Execute target specific code to start task     */
     }
 }
 /*$PAGE*/
@@ -1620,8 +1628,11 @@ void  OS_Sched (void)
 #if OS_TASK_PROFILE_EN > 0
                 OSTCBHighRdy->OSTCBCtxSwCtr++;         /* Inc. # of context switches to this task      */
 #endif
-                OSCtxSwCtr++;                          /* Increment context switch counter             */
-                OS_TASK_SW();                          /* Perform a context switch                     */
+                OSCtxSwCtr++;							/* Increment context switch counter             */
+                __asm{
+									swi 0x04
+								}
+//								OS_TASK_SW();                          /* Perform a context switch                     */
             }
         }
     }
