@@ -58,7 +58,6 @@ void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
 	print_str("Hard Fault exception occurs!\n");
-
 	while (1)
 	{
 	}
