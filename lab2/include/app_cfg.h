@@ -14,8 +14,8 @@
 
 // #define  APP_CFG_TASK_START_PRIO                          2u
 
-#define  TASK1_PRIO                            3u
-#define  TASK2_PRIO                            4u
+#define  TASK1_PRIO                            30u
+#define  TASK2_PRIO                            29u
 #define  TASK3_PRIO                            5u
 
 
