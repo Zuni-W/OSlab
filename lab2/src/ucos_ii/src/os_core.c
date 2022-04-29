@@ -86,68 +86,15 @@ static  void  OS_SchedNew(void);
 #if OS_SCHED_ROUND_ROBIN_EN > 0
 void OSRdyQueueIn (OS_TCB *ptcb)
 {
-	if (OSRdyTCBQueueNum==0)
-	{	
-		OSRdyTCBQueueFront=OSRdyTCBQueueRear=ptcb;
-		OSRdyTCBQueueNum++;
-	}
-	else{
-	ptcb->OSRdyTCBPrev=OSRdyTCBQueueRear;
-	OSRdyTCBQueueRear->OSRdyTCBNext= ptcb;
-	OSRdyTCBQueueRear=ptcb;	
-	OSRdyTCBQueueNum++;
-		
-	}/*
-	else{
-		struct  os_tcb * tmp=OSRdyTCBQueueRear;
-	while(tmp&&((ptcb->OSTCBBitY)<(tmp->OSTCBBitY)))
-	{
-		tmp=tmp->OSRdyTCBPrev;
-	}
-	if (tmp!=0)
-	{
-	ptcb->OSRdyTCBPrev=tmp;
-	ptcb->OSRdyTCBNext=tmp->OSRdyTCBNext;
-	(tmp->OSRdyTCBNext)=ptcb;
-		if(ptcb->OSRdyTCBNext)
-	(ptcb->OSRdyTCBNext)->OSRdyTCBPrev=ptcb;
-	}
-	else
-	{
-		ptcb->OSRdyTCBNext=OSRdyTCBQueueFront;
-		OSRdyTCBQueueFront->OSRdyTCBPrev=ptcb;
-		ptcb->OSRdyTCBPrev=0;
-		OSRdyTCBQueueFront=ptcb;
-	}
-	OSRdyTCBQueueNum++;
-	}*/
-	
+//your codes
 }
 OS_TCB* OSRdyQueueOut ()
 {
 //your codes
-	struct os_tcb *tmp;
-	tmp=OSRdyTCBQueueFront;
-	if(OSRdyTCBQueueNum==1)
-	{
-			OSRdyTCBQueueFront=OSRdyTCBQueueRear=0;
-			OSRdyTCBQueueNum--;
-		  tmp->quantum=OS_SCHED_QUANTUM_MAX;
-			return tmp;
-	
-	}		
-	OSRdyTCBQueueFront=OSRdyTCBQueueFront->OSRdyTCBNext;
-	OSRdyTCBQueueFront->OSRdyTCBPrev=0;
-	OSRdyTCBQueueNum--;
-	if(tmp->OSTCBPrio!=OS_TASK_IDLE_PRIO)
-	tmp->quantum=OS_SCHED_QUANTUM_MAX;
-	else tmp->quantum=0;
-	return tmp;
 }
-void OS_InitRdyQueue()
+void OS_InitRdyQueue ()
 {
- 	OSRdyTCBQueueFront=OSRdyTCBQueueRear=0;
-	OSRdyTCBQueueNum=0;
+//your codes
 }
 #endif
 /*******************************************************************************************************/
@@ -973,7 +920,7 @@ void  OSTimeTick (void)
 		
 #if OS_SCHED_ROUND_ROBIN_EN > 0
 		//your code: decrese quantum time of current task (pointer of current tack's TCB: OSTCBCur):
-		(OSTCBCur->quantum)--;
+		
 #endif
 
 		while (ptcb->OSTCBPrio != OS_TASK_IDLE_PRIO) {     /* Go through all TCBs in TCB list              */
@@ -992,8 +939,7 @@ void  OSTimeTick (void)
 						
 						#if OS_SCHED_ROUND_ROBIN_EN > 0               /* No, and if not in the ready queue, then queue in */
 							if ((OSRdyGrp & ptcb->OSTCBBitY) == 0 || (OSRdyTbl[ptcb->OSTCBY]&ptcb->OSTCBBitX) == 0)
-									OSRdyQueueIn(ptcb);
-							//your code: put ptcb into queue of ready tasks 
+								//your code: put ptcb into queue of ready tasks 
 						#endif
 							
                         OSRdyGrp               |= ptcb->OSTCBBitY;             
@@ -1752,24 +1698,11 @@ static  void  OS_SchedNew (void)
 #if OS_SCHED_ROUND_ROBIN_EN > 0
 	if (OSTCBCur == 0 | OSTCBCur->quantum == 0)
 	{
-		if (OSTCBCur!=0)
-		{
+		if (OSTCBCur!=0) 
 			OSRdyQueueIn(OSTCBCur);
-		}//your code:
-		struct os_tcb* tmp=OSRdyQueueOut();
-		while(tmp->quantum==0)
-		{
-			OSRdyQueueIn(tmp);
-			tmp=OSRdyQueueOut();
-		}
-		OSPrioHighRdy = tmp->OSTCBPrio;
+		//your code:
+		//OSPrioHighRdy = ?;
 	}
-	
-	
-	
-	
-	
-	
 #endif
 #else                                            /* We support up to 256 tasks                         */
     INT8U   y;
@@ -2131,7 +2064,6 @@ INT8U  OS_TCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT32U stk
 		
 		#if OS_SCHED_ROUND_ROBIN_EN > 0
 		//your code:  put ptcb into queue of ready TCBs
-				OSRdyQueueIn(ptcb);
 		#endif
 		
         OSRdyGrp               |= ptcb->OSTCBBitY;         /* Make task ready to run                   */
