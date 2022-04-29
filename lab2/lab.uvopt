@@ -192,6 +192,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>ptcb</ItemText>
         </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>states</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tmp</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -207,7 +217,22 @@
         <Ww>
           <count>2</count>
           <WinNumber>2</WinNumber>
-          <ItemText>OSRdyTCBQueueFront-&gt;OSRdyTCBNext-&gt;OSRdyTCBNext</ItemText>
+          <ItemText>OSRdyTCBQueueNum</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>OSRdyTCBQueueRear</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>tmp</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>ptcb</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
